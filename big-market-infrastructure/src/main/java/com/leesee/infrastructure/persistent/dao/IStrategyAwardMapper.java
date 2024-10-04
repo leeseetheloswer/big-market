@@ -15,4 +15,5 @@ import java.util.List;
 @Mapper
 public interface IStrategyAwardMapper {
     List<StrategyAward> queryStrategyAwardList();
+    List<StrategyAward> queryStrategyAwardListByStrategyId(Long strategyId);
 }
