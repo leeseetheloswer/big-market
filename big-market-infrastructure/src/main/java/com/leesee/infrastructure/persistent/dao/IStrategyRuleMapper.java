@@ -1,5 +1,6 @@
 package com.leesee.infrastructure.persistent.dao;
 
+import com.leesee.infrastructure.persistent.po.StrategyRule;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,4 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface IStrategyRuleMapper {
+    StrategyRule queryStrategyRule(Long strategyId, String ruleModel);
 }

@@ -1,10 +1,5 @@
 package com.leesee.domain.strategy.service.armory;
 
-import com.leesee.domain.strategy.model.entity.StrategyAwardEntity;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 /**
  * @Title: IStrategyArmory
  * @Author leesee
@@ -17,5 +12,5 @@ public interface IStrategyArmory {
 
     boolean assembleLotteryStrategy(Long strategyId);
 
-    Integer getRandomAwardId(Long StrategyId);
+
 }
