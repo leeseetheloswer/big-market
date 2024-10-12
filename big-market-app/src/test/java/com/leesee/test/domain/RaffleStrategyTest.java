@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.leesee.domain.strategy.model.entity.RaffleAwardEntity;
 import com.leesee.domain.strategy.model.entity.RaffleFactorEntity;
 import com.leesee.domain.strategy.service.IRaffleStrategy;
+import com.leesee.domain.strategy.service.armory.IStrategyArmory;
 import com.leesee.domain.strategy.service.rule.impl.RuleWeightFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -31,9 +32,14 @@ public class RaffleStrategyTest {
 
     @Resource
     private RuleWeightFilter ruleWeightLogicFilter;
+    @Resource
+    private IStrategyArmory  strategyArmory;
 
     @Before
     public void setUp() {
+        log.info("测试结果：{}", strategyArmory.assembleLotteryStrategy(100001L));
+//        log.info("测试结果：{}", strategyArmory.assembleLotteryStrategy(100002L));
+        log.info("测试结果：{}", strategyArmory.assembleLotteryStrategy(100003L));
         ReflectionTestUtils.setField(ruleWeightLogicFilter, "userScore", 45000L);
     }
 
@@ -55,6 +61,19 @@ public class RaffleStrategyTest {
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
                 .userId("user03")  // 黑名单用户 user01,user02,user03
                 .strategyId(100001L)
+                .build();
+
+        RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
+
+        log.info("请求参数：{}", JSON.toJSONString(raffleFactorEntity));
+        log.info("测试结果：{}", JSON.toJSONString(raffleAwardEntity));
+    }
+
+    @Test
+    public void test_raffle_center_rule_lock(){
+        RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
+                .userId("leesee")
+                .strategyId(100003L)
                 .build();
 
         RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);

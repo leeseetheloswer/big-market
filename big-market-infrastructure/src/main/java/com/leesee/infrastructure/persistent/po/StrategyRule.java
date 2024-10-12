@@ -1,6 +1,5 @@
 package com.leesee.infrastructure.persistent.po;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,7 +8,6 @@ import java.util.Date;
  *策略规则
  */
 @Data
-@Builder
 public class StrategyRule {
 
     /** 自增ID */

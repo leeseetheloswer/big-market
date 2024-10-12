@@ -16,4 +16,5 @@ import java.util.List;
 public interface IStrategyAwardMapper {
     List<StrategyAward> queryStrategyAwardList();
     List<StrategyAward> queryStrategyAwardListByStrategyId(Long strategyId);
+    String queryStrategyAwardRuleModels(StrategyAward strategyAwardReq);
 }

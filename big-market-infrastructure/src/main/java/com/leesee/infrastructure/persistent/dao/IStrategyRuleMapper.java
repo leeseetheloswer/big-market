@@ -14,4 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface IStrategyRuleMapper {
     StrategyRule queryStrategyRule(Long strategyId, String ruleModel);
     String queryStrategyRuleValue(StrategyRule strategyRuleReq);
+
+    String testRuleModelMapping(Long strategyId, String ruleModel);
 }

@@ -3,6 +3,7 @@ package com.leesee.infrastructure.persistent.repository;
 import com.leesee.domain.strategy.model.entity.StrategyAwardEntity;
 import com.leesee.domain.strategy.model.entity.StrategyEntity;
 import com.leesee.domain.strategy.model.entity.StrategyRuleEntity;
+import com.leesee.domain.strategy.model.vo.StrategyAwardRuleModelVO;
 import com.leesee.domain.strategy.repository.IStrategyRepository;
 import com.leesee.infrastructure.persistent.dao.IStrategyAwardMapper;
 import com.leesee.infrastructure.persistent.dao.IStrategyMapper;
@@ -87,7 +88,7 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public Integer getStrategyAwardAssemble(String key, int rateKey) {
-        return redisService.getFromMap(Constants.RedisKey.STRATEGY_RATE_TABLE_KEY .concat(key), rateKey);
+        return redisService.getFromMap(Constants.RedisKey.STRATEGY_RATE_TABLE_KEY.concat(key), rateKey);
     }
 
     @Override
@@ -122,11 +123,19 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public String queryStrategyRuleValue(Long strategyId, Integer awardId, String ruleModel) {
-        StrategyRule strategyRuleReq = StrategyRule.builder()
-                .strategyId(strategyId)
-                .awardId(awardId)
-                .ruleModel(ruleModel)
-                .build();
-             return strategyRuleMapper.queryStrategyRuleValue(strategyRuleReq);
+        StrategyRule strategyRuleReq = new StrategyRule();
+        strategyRuleReq.setStrategyId(strategyId);
+        strategyRuleReq.setAwardId(awardId);
+        strategyRuleReq.setRuleModel(ruleModel);
+        return strategyRuleMapper.queryStrategyRuleValue(strategyRuleReq);
+    }
+
+    @Override
+    public StrategyAwardRuleModelVO queryStrategyAwardRuleModelVO(Long strategyId, Integer awardId) {
+        StrategyAward strategyAwardReq = new StrategyAward();
+        strategyAwardReq.setStrategyId(strategyId);
+        strategyAwardReq.setAwardId(awardId);
+        String ruleModels = strategyAwardMapper.queryStrategyAwardRuleModels(strategyAwardReq);
+        return StrategyAwardRuleModelVO.builder().ruleModels(ruleModels).build();
     }
 }
