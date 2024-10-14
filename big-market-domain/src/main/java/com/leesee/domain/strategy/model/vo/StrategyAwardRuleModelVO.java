@@ -1,6 +1,6 @@
 package com.leesee.domain.strategy.model.vo;
 
-import com.leesee.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import com.leesee.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import com.leesee.types.common.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

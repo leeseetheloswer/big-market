@@ -5,14 +5,12 @@ import com.leesee.domain.strategy.model.entity.RaffleAwardEntity;
 import com.leesee.domain.strategy.model.entity.RaffleFactorEntity;
 import com.leesee.domain.strategy.service.IRaffleStrategy;
 import com.leesee.domain.strategy.service.armory.IStrategyArmory;
-import com.leesee.domain.strategy.service.rule.impl.RuleWeightFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.annotation.Resource;
 
@@ -30,9 +28,7 @@ public class RaffleStrategyTest {
     @Resource
     private IRaffleStrategy raffleStrategy;
 
-    @Resource
-    private RuleWeightFilter ruleWeightLogicFilter;
-    @Resource
+@Resource
     private IStrategyArmory  strategyArmory;
 
     @Before
@@ -40,7 +36,7 @@ public class RaffleStrategyTest {
         log.info("测试结果：{}", strategyArmory.assembleLotteryStrategy(100001L));
 //        log.info("测试结果：{}", strategyArmory.assembleLotteryStrategy(100002L));
         log.info("测试结果：{}", strategyArmory.assembleLotteryStrategy(100003L));
-        ReflectionTestUtils.setField(ruleWeightLogicFilter, "userScore", 45000L);
+//        ReflectionTestUtils.setField(ruleWeightLogicFilter, "userScore", 45000L);
     }
 
     @Test
