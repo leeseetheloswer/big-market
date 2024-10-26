@@ -2,7 +2,7 @@ package com.leesee.domain.strategy.service.rule.tree.impl;
 
 import com.leesee.domain.strategy.model.vo.RuleLogicCheckTypeVO;
 import com.leesee.domain.strategy.service.rule.tree.ILogicTreeNode;
-import com.leesee.domain.strategy.service.rule.tree.factory.DefaultLogicTreeFactory;
+import com.leesee.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +17,11 @@ import org.springframework.stereotype.Component;
 @Component("rule_luck_award")
 public class RuleLuckAwardLogicTreeNode implements ILogicTreeNode {
     @Override
-    public DefaultLogicTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId) {
+    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId) {
 
-        return DefaultLogicTreeFactory.TreeActionEntity.builder()
+        return DefaultTreeFactory.TreeActionEntity.builder()
                 .ruleLogicCheckType(RuleLogicCheckTypeVO.TAKE_OVER)
-                .strategyAwardData(DefaultLogicTreeFactory.StrategyAwardData.builder()
+                .strategyAwardData(DefaultTreeFactory.StrategyAwardVO.builder()
                         .awardId(101)
                         .awardRuleValue("1,100")
                         .build())

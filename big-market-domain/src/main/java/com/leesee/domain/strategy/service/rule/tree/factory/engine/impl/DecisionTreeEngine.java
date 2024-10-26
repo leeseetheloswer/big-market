@@ -5,8 +5,9 @@ import com.leesee.domain.strategy.model.vo.RuleTreeNodeLineVO;
 import com.leesee.domain.strategy.model.vo.RuleTreeNodeVO;
 import com.leesee.domain.strategy.model.vo.RuleTreeVO;
 import com.leesee.domain.strategy.service.rule.tree.ILogicTreeNode;
-import com.leesee.domain.strategy.service.rule.tree.factory.DefaultLogicTreeFactory;
+import com.leesee.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import com.leesee.domain.strategy.service.rule.tree.factory.engine.IDecisionTreeEngine;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Map;
  * @Date 2024/10/15 2:30
  * @description:
  */
+@Slf4j
 public class DecisionTreeEngine implements IDecisionTreeEngine {
     private final Map<String, ILogicTreeNode> logicTreeNodeGroup;
 
@@ -29,8 +31,8 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
     }
 
     @Override
-    public DefaultLogicTreeFactory.StrategyAwardData process(String userId, Long strategyId, Integer awardId) {
-        DefaultLogicTreeFactory.StrategyAwardData strategyAwardData = null;
+    public DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId) {
+        DefaultTreeFactory.StrategyAwardVO strategyAwardData = null;
 
         //获取基础信息
         String nextNode = ruleTreeVO.getTreeRootRuleNode();
@@ -40,10 +42,10 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
         while (null != nextNode) {
             ILogicTreeNode logicTreeNode = logicTreeNodeGroup.get(ruleTreeNode.getRuleKey());
 
-            DefaultLogicTreeFactory.TreeActionEntity logicEntity = logicTreeNode.logic(userId, strategyId, awardId);
+            DefaultTreeFactory.TreeActionEntity logicEntity = logicTreeNode.logic(userId, strategyId, awardId);
             RuleLogicCheckTypeVO ruleLogicCheckType = logicEntity.getRuleLogicCheckType();
             strategyAwardData = logicEntity.getStrategyAwardData();
-
+            log.info("决策树引擎【{}】treeId:{} node:{} code:{}", ruleTreeVO.getTreeName(), ruleTreeVO.getTreeId(), nextNode, ruleLogicCheckType.getCode());
             nextNode = nextNode(ruleLogicCheckType.getCode(), ruleTreeNode.getTreeNodeLineVOList());
             ruleTreeNode=treeNodeMap.get(nextNode);
         }

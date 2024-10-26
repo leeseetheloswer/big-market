@@ -1,6 +1,6 @@
 package com.leesee.domain.strategy.service.rule.tree;
 
-import com.leesee.domain.strategy.service.rule.tree.factory.DefaultLogicTreeFactory;
+import com.leesee.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 
 /**
  * @Title: ILogicTreeNode
@@ -10,5 +10,5 @@ import com.leesee.domain.strategy.service.rule.tree.factory.DefaultLogicTreeFact
  * @description: 规则树接口
  */
 public interface ILogicTreeNode {
-    DefaultLogicTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId);
+    DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId);
 }

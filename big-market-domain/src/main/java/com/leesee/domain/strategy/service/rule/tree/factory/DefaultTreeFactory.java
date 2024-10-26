@@ -21,10 +21,10 @@ import java.util.Map;
  * @description: 规则树工厂
  */
 @Service
-public class DefaultLogicTreeFactory {
+public class DefaultTreeFactory {
     private final Map<String, ILogicTreeNode>logicTreeNodeMap;
 
-    public DefaultLogicTreeFactory(Map<String, ILogicTreeNode> logicTreeNodeMap) {
+    public DefaultTreeFactory(Map<String, ILogicTreeNode> logicTreeNodeMap) {
         this.logicTreeNodeMap = logicTreeNodeMap;
     }
 
@@ -39,14 +39,14 @@ public class DefaultLogicTreeFactory {
     @NoArgsConstructor
     public static class TreeActionEntity {
         private RuleLogicCheckTypeVO ruleLogicCheckType;
-        private StrategyAwardData strategyAwardData;
+        private StrategyAwardVO strategyAwardData;
     }
 
     @Data
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class StrategyAwardData {
+    public static class StrategyAwardVO {
         /** 抽奖奖品ID - 内部流转使用 */
         private Integer awardId;
         /** 抽奖奖品规则 */

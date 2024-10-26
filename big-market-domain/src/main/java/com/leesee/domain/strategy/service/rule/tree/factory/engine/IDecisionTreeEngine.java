@@ -1,6 +1,6 @@
 package com.leesee.domain.strategy.service.rule.tree.factory.engine;
 
-import com.leesee.domain.strategy.service.rule.tree.factory.DefaultLogicTreeFactory;
+import com.leesee.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 
 /**
  * @Title: IDecisionTreeEngine
@@ -11,5 +11,5 @@ import com.leesee.domain.strategy.service.rule.tree.factory.DefaultLogicTreeFact
  */
 public interface IDecisionTreeEngine {
 
-    DefaultLogicTreeFactory.StrategyAwardData process(String userId, Long strategyId, Integer awardId);
+    DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId);
 }
