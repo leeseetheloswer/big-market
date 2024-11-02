@@ -2,6 +2,7 @@ package com.leesee.domain.strategy.service.raffle;
 
 import com.leesee.domain.strategy.model.vo.RuleTreeVO;
 import com.leesee.domain.strategy.model.vo.StrategyAwardRuleModelVO;
+import com.leesee.domain.strategy.model.vo.StrategyAwardStockKeyVO;
 import com.leesee.domain.strategy.repository.IStrategyRepository;
 import com.leesee.domain.strategy.service.AbstractRaffleStrategy;
 import com.leesee.domain.strategy.service.armory.IStrategyDispatch;
@@ -48,4 +49,13 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
     }
 
 
+    @Override
+    public StrategyAwardStockKeyVO takeQueueValue()  {
+        return repository.takeQueueValue();
+    }
+
+    @Override
+    public void updateStrategyAwardStock(Long strategyId, Integer awardId) {
+        repository.updateStrategyAwardStock(strategyId, awardId);
+    }
 }

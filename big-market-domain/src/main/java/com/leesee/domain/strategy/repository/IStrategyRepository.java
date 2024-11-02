@@ -5,6 +5,7 @@ import com.leesee.domain.strategy.model.entity.StrategyEntity;
 import com.leesee.domain.strategy.model.entity.StrategyRuleEntity;
 import com.leesee.domain.strategy.model.vo.RuleTreeVO;
 import com.leesee.domain.strategy.model.vo.StrategyAwardRuleModelVO;
+import com.leesee.domain.strategy.model.vo.StrategyAwardStockKeyVO;
 
 import java.util.List;
 import java.util.Map;
@@ -40,4 +41,23 @@ public interface IStrategyRepository {
     StrategyAwardRuleModelVO queryStrategyAwardRuleModelVO(Long strategyId, Integer awardId);
 
     RuleTreeVO queryRuleTreeVOByTreeId(String treeId);
+
+    /**
+     * 缓存奖品库存
+     * @param cacheKey key
+     * @param awardCount 奖品数量
+     */
+    void cacheStrategyAwardCount(String cacheKey, Integer awardCount);
+
+    /**
+     * 从缓存中扣减奖品库存
+     * @param cacheKey key
+     */
+    Boolean subtractionAwardStock(String cacheKey);
+
+    void awardStockConsumeSendQueue(StrategyAwardStockKeyVO build);
+
+    StrategyAwardStockKeyVO takeQueueValue();
+
+    void updateStrategyAwardStock(Long strategyId, Integer awardId);
 }
