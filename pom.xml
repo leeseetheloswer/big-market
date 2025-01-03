@@ -13,6 +13,7 @@
         <module>big-market-trigger</module>
         <module>big-market-infrastructure</module>
         <module>big-market-types</module>
+        <module>big-market-api</module>
     </modules>
 
     <repositories>
@@ -39,10 +40,9 @@
 
     <developers>
         <developer>
-            <name>xiaofuge</name>
-            <email>184172133@qq.com</email>
-            <organization>fuzhengwei</organization>
-            <organizationUrl>https://github.com/fuzhengwei</organizationUrl>
+            <name>xlessee</name>
+            <email>1443442148@qq.com</email>
+            <organization>leesee</organization>
         </developer>
     </developers>
 

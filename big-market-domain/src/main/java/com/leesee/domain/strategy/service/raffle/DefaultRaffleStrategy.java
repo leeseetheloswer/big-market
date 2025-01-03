@@ -1,10 +1,13 @@
 package com.leesee.domain.strategy.service.raffle;
 
+import com.leesee.domain.strategy.model.entity.StrategyAwardEntity;
 import com.leesee.domain.strategy.model.vo.RuleTreeVO;
 import com.leesee.domain.strategy.model.vo.StrategyAwardRuleModelVO;
 import com.leesee.domain.strategy.model.vo.StrategyAwardStockKeyVO;
 import com.leesee.domain.strategy.repository.IStrategyRepository;
 import com.leesee.domain.strategy.service.AbstractRaffleStrategy;
+import com.leesee.domain.strategy.service.IRaffleAward;
+import com.leesee.domain.strategy.service.IRaffleStock;
 import com.leesee.domain.strategy.service.armory.IStrategyDispatch;
 import com.leesee.domain.strategy.service.rule.chain.ILogicChain;
 import com.leesee.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
@@ -12,6 +15,8 @@ import com.leesee.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import com.leesee.domain.strategy.service.rule.tree.factory.engine.IDecisionTreeEngine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Title: DefaultRaffleStrategy
@@ -22,7 +27,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
+public class DefaultRaffleStrategy extends AbstractRaffleStrategy  implements IRaffleAward, IRaffleStock {
 
     public DefaultRaffleStrategy(IStrategyRepository repository, IStrategyDispatch strategyDispatch, DefaultChainFactory chainFactory, DefaultTreeFactory defaultTreeFactory) {
         super(repository, strategyDispatch,chainFactory, defaultTreeFactory);
@@ -57,5 +62,10 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
     @Override
     public void updateStrategyAwardStock(Long strategyId, Integer awardId) {
         repository.updateStrategyAwardStock(strategyId, awardId);
+    }
+
+    @Override
+    public List<StrategyAwardEntity> queryRaffleStrategyAwardList(Long strategyId) {
+        return repository.queryStrategyAwardList(strategyId);
     }
 }

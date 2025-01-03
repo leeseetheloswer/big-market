@@ -1,5 +1,13 @@
 server:
-  port: 8091
+  port: 8080
+
+# 应用配置
+app:
+  config:
+    # 版本，方便通过接口版本升级
+    api-version: v1
+    # 跨域，开发阶段可以设置为 * 不限制
+    cross-origin: '*'
 
 # 线程池配置
 thread:
@@ -16,8 +24,8 @@ thread:
 spring:
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://127.0.0.1:13306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
+    password: cheng123
+    url: jdbc:mysql://47.100.127.214:3306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   hikari:
     pool-name: Retail_HikariCP
@@ -37,8 +45,9 @@ mybatis:
 redis:
   sdk:
     config:
-      host: 127.0.0.1
-      port: 16379
+      host: 47.100.127.214
+      port: 6379
+      password: cheng123
       pool-size: 10
       min-idle-size: 5
       idle-timeout: 30000
@@ -47,6 +56,8 @@ redis:
       retry-interval: 1000
       ping-interval: 60000
       keep-alive: true
+
+
 # 日志
 logging:
   level:
