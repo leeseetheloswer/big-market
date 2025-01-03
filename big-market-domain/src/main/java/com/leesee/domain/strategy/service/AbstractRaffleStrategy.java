@@ -2,6 +2,7 @@ package com.leesee.domain.strategy.service;
 
 import com.leesee.domain.strategy.model.entity.RaffleAwardEntity;
 import com.leesee.domain.strategy.model.entity.RaffleFactorEntity;
+import com.leesee.domain.strategy.model.entity.StrategyAwardEntity;
 import com.leesee.domain.strategy.repository.IStrategyRepository;
 import com.leesee.domain.strategy.service.armory.IStrategyDispatch;
 import com.leesee.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
@@ -10,6 +11,8 @@ import com.leesee.types.enums.ResponseCode;
 import com.leesee.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.annotation.Resource;
 
 /**
  * @Title: AbstractRaffleStrategy
@@ -20,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 @Slf4j
 public abstract class AbstractRaffleStrategy implements IRaffleStrategy ,IRaffleStock{
+
 
     // 策略仓储服务
     protected IStrategyRepository repository;
@@ -60,9 +64,15 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy ,IRaffle
         DefaultTreeFactory.StrategyAwardVO treeStrategyAwardVO = raffleLogicTree(userId, strategyId, awardId);
         log.info("抽奖策略计算-规则树 {} {} {} {}", userId, strategyId, treeStrategyAwardVO.getAwardId(), treeStrategyAwardVO.getAwardRuleValue());
 
+        return buildRaffleAwardEntity(strategyId, treeStrategyAwardVO, awardId);
+    }
+
+    private  RaffleAwardEntity buildRaffleAwardEntity(Long strategyId, DefaultTreeFactory.StrategyAwardVO treeStrategyAwardVO, Integer awardId) {
+        StrategyAwardEntity strategyAwardEntity=repository.queryStrategyAwardEntity(strategyId, awardId);
         return RaffleAwardEntity.builder()
                 .strategyId(strategyId)
                 .awardConfig(treeStrategyAwardVO.getAwardRuleValue())
+                .sort(strategyAwardEntity.getSort())
                 .awardId(awardId)
                 .build();
     }

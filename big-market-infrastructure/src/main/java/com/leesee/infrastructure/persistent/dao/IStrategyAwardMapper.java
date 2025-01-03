@@ -1,5 +1,6 @@
 package com.leesee.infrastructure.persistent.dao;
 
+import com.leesee.domain.strategy.model.entity.StrategyAwardEntity;
 import com.leesee.infrastructure.persistent.po.StrategyAward;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,6 @@ public interface IStrategyAwardMapper {
     String queryStrategyAwardRuleModels(StrategyAward strategyAwardReq);
 
     void updateStrategyAwardStock(StrategyAward strategyAward);
+
+    StrategyAward queryStrategyAwardById(Long strategyId, Integer awardId);
 }

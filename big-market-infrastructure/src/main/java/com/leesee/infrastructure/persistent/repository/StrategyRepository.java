@@ -261,4 +261,19 @@ public class StrategyRepository implements IStrategyRepository {
         strategyAward.setAwardId(awardId);
         strategyAwardMapper.updateStrategyAwardStock(strategyAward);
     }
+
+    @Override
+    public StrategyAwardEntity queryStrategyAwardEntity(Long strategyId, Integer awardId) {
+        StrategyAward strategyAward = strategyAwardMapper.queryStrategyAwardById(strategyId, awardId);
+        return StrategyAwardEntity.builder()
+                .strategyId(strategyAward.getStrategyId())
+                .awardId(strategyAward.getAwardId())
+                .awardTitle(strategyAward.getAwardTitle())
+                .awardSubtitle(strategyAward.getAwardSubtitle())
+                .awardCount(strategyAward.getAwardCount())
+                .awardCountSurplus(strategyAward.getAwardCountSurplus())
+                .awardRate(strategyAward.getAwardRate())
+                .sort(strategyAward.getSort())
+                .build();
+    }
 }
